@@ -8,6 +8,8 @@ Implement four design patterns together
   - A world must start with at least 1 farm
   - Farms can be of 3 different types (Hybrid, Animal, Crop)
   - Farms start with up to 6 farmers, more being hired each cycle
+  - Farms only gain money after 24 hours have cycled
+  - Farms gain money based their money skill
   
 - Observer to notify different elements of each tick and how they should act accordingly
   - Runs on cycles based on user input
