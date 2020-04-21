@@ -1,3 +1,5 @@
+package FarmFactory;
+
 import java.util.Random;
 
 public class FarmFactory {

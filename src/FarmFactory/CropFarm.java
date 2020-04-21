@@ -1,30 +1,32 @@
+package FarmFactory;
+
 import java.util.Random;
 
-public class AnimalFarm implements Farm {
+public class CropFarm implements Farm {
     int currency;
     int level;
     int farmers;
-    int herdSkill;
+    int cropSkill;
     int moneySkill;
 
-    public AnimalFarm() {
+    public CropFarm() {
         Random rand = new Random();
         this.level = 1;
         this.currency = rand.nextInt(400);
         this.farmers = rand.nextInt(6);
-        this.herdSkill = rand.nextInt(3);
-        if (herdSkill == 0) herdSkill++;
+        this.cropSkill = rand.nextInt(3);
+        if (cropSkill == 0) cropSkill++;
         this.moneySkill = rand.nextInt(2);
         if (moneySkill == 0) moneySkill++;
     }
 
-    public AnimalFarm(int farmers) {
+    public CropFarm(int farmers) {
         Random rand = new Random();
         this.level = 1;
         this.currency = rand.nextInt(400);
         this.farmers = farmers;
-        this.herdSkill = rand.nextInt(2);
-        if (herdSkill == 0) herdSkill++;
+        this.cropSkill = rand.nextInt(2);
+        if (cropSkill == 0) cropSkill++;
         this.moneySkill = rand.nextInt(2);
         if (moneySkill == 0) moneySkill++;
     }
@@ -44,20 +46,20 @@ public class AnimalFarm implements Farm {
             newFarm = extra;
             this.farmers = this.farmers - extra;
         }
-        this.herdSkill = this.herdSkill + rand.nextInt(2);
+        this.cropSkill = this.cropSkill + rand.nextInt(2);
         this.moneySkill = this.moneySkill + rand.nextInt(2);
         return newFarm;
     }
 
     @Override
     public void printFarm() {
-        System.out.println("This is an Animal Farm\n" +
+        System.out.println("This is an Crop Farm\n" +
                 "Currency is currently $" + this.currency +
                 "\nThis farms current level is " + this.level +
                 "\nAn upgrade currently cost $" + this.upgrade +
                 "\nThere are currently " + this.farmers + " farmers" +
                 "\nThe maximum farmer capacity is " + this.capacity +
-                "\nThe herd skill level of this farm is " + this.herdSkill +
+                "\nThe crop skill level of this farm is " + this.cropSkill +
                 "\nThe money skill level of this farm is " + this.moneySkill +
                 "\n");
     }

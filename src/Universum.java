@@ -1,3 +1,5 @@
+import TickObserver.FarmData;
+
 import java.util.Scanner;
 
 public class Universum {

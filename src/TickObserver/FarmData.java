@@ -1,3 +1,9 @@
+package TickObserver;
+
+import FarmFactory.Farm;
+import FarmFactory.FarmFactory;
+import TickObserver.Subject;
+
 import java.util.ArrayList;
 
 public class FarmData implements Subject {
