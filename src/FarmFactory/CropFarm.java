@@ -5,9 +5,9 @@ import java.util.Random;
 public class CropFarm implements Farm {
     int currency;
     int level;
-    final int upgrade = 1200;
+    final static int upgrade = 1200;
     int farmers;
-    final int capacity = 10;
+    final static int capacity = 10;
     int cropSkill;
     int moneySkill;
 

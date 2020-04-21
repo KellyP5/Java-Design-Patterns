@@ -14,7 +14,7 @@ public class Universum {
         farms.get(0).printFarm();
 
         String tick = "Y";
-        Scanner in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in, "UTF-8");
         while (tick.equalsIgnoreCase("y")) {
             System.out.println("Would you like to tick another day/night? If yes, enter 'Y', else enter 'N'");
             tick = in.next();
