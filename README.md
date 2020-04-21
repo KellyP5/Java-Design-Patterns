@@ -1,7 +1,9 @@
 # SER316DesignPatterns
 
 
+
 #Plan
+
 
 Implement four design patterns together
 - Factory pattern for farms
