@@ -3,36 +3,39 @@ package FarmFactory;
 import java.util.Random;
 
 public class HybridFarm implements Farm {
-    int currency;
-    int level;
-    int farmers;
-    int herdSkill;
-    int cropSkill;
-    int moneySkill;
+    private int currency;
+    private int level;
+    private int farmers;
+    private int herdSkill;
+    private int cropSkill;
+    private int moneySkill;
+    private int cycles;
 
     public HybridFarm() {
         Random rand = new Random();
-        this.level = 1;
-        this.currency = rand.nextInt(400);
-        this.farmers = rand.nextInt(6);
-        this.herdSkill = rand.nextInt(2);
+        level = 1;
+        cycles = 0;
+        currency = rand.nextInt(400);
+        farmers = rand.nextInt(6);
+        herdSkill = rand.nextInt(2);
         if (herdSkill == 0) herdSkill++;
-        this.cropSkill = rand.nextInt(2);
+        cropSkill = rand.nextInt(2);
         if (cropSkill == 0) cropSkill++;
-        this.moneySkill = rand.nextInt(2);
+        moneySkill = rand.nextInt(2);
         if (moneySkill == 0) moneySkill++;
     }
 
     public HybridFarm(int farmers) {
         Random rand = new Random();
-        this.level = 1;
-        this.currency = rand.nextInt(400);
+        level = 1;
+        cycles = 0;
+        currency = rand.nextInt(400);
         this.farmers = farmers;
-        this.herdSkill = rand.nextInt(1);
+        herdSkill = rand.nextInt(2);
         if (herdSkill == 0) herdSkill++;
-        this.cropSkill = rand.nextInt(1);
+        cropSkill = rand.nextInt(2);
         if (cropSkill == 0) cropSkill++;
-        this.moneySkill = rand.nextInt(2);
+        moneySkill = rand.nextInt(2);
         if (moneySkill == 0) moneySkill++;
     }
 
@@ -53,6 +56,7 @@ public class HybridFarm implements Farm {
         }
         this.herdSkill = this.herdSkill + rand.nextInt(2);
         this.moneySkill = this.moneySkill + rand.nextInt(2);
+        cycles++;
         return newFarm;
     }
 
@@ -67,6 +71,6 @@ public class HybridFarm implements Farm {
                 "\nThe herd skill level of this farm is " + this.herdSkill +
                 "\nThe money skill level of this farm is " + this.moneySkill +
                 "\nThe crop skill level of this farm is " + this.cropSkill +
-                "\n");
+                "\nThis farm has existed for " + cycles/2 + " days\n");
     }
 }

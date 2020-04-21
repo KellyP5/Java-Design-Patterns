@@ -8,10 +8,12 @@ public class CropFarm implements Farm {
     int farmers;
     int cropSkill;
     int moneySkill;
+    int cycles;
 
     public CropFarm() {
         Random rand = new Random();
         this.level = 1;
+        cycles = 0;
         this.currency = rand.nextInt(400);
         this.farmers = rand.nextInt(6);
         this.cropSkill = rand.nextInt(3);
@@ -22,12 +24,13 @@ public class CropFarm implements Farm {
 
     public CropFarm(int farmers) {
         Random rand = new Random();
-        this.level = 1;
-        this.currency = rand.nextInt(400);
+        level = 1;
+        cycles = 0;
+        currency = rand.nextInt(400);
         this.farmers = farmers;
-        this.cropSkill = rand.nextInt(2);
+        cropSkill = rand.nextInt(2);
         if (cropSkill == 0) cropSkill++;
-        this.moneySkill = rand.nextInt(2);
+        moneySkill = rand.nextInt(2);
         if (moneySkill == 0) moneySkill++;
     }
 
@@ -48,6 +51,7 @@ public class CropFarm implements Farm {
         }
         this.cropSkill = this.cropSkill + rand.nextInt(2);
         this.moneySkill = this.moneySkill + rand.nextInt(2);
+        cycles++;
         return newFarm;
     }
 
@@ -61,6 +65,6 @@ public class CropFarm implements Farm {
                 "\nThe maximum farmer capacity is " + this.capacity +
                 "\nThe crop skill level of this farm is " + this.cropSkill +
                 "\nThe money skill level of this farm is " + this.moneySkill +
-                "\n");
+                "\nThis farm has existed for " + cycles/2 + " days\n");
     }
 }

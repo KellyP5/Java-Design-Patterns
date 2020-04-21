@@ -5,8 +5,6 @@ import java.util.Scanner;
 public class Universum {
     public static void main(String[] args) {
         FarmData farms = new FarmData();
-
-
         String tick = "Y";
         String day = "Day";
         Scanner in = new Scanner(System.in, "UTF-8");
