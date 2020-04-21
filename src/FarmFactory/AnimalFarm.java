@@ -5,9 +5,7 @@ import java.util.Random;
 public class AnimalFarm implements Farm {
     int currency;
     int level;
-    final static int upgrade = 1200;
     int farmers;
-    final static int capacity = 10;
     int herdSkill;
     int moneySkill;
 
