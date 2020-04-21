@@ -1,8 +1,4 @@
-# SER316DesignPatterns
-
-
-
-Plan
+# SER316 Design Patterns Plan
 
 
 Implement four design patterns together
