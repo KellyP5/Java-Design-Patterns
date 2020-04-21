@@ -1,36 +1,29 @@
-package FarmFactory;
-
 import java.util.Random;
 
-public class HybridFarm implements Farm {
+public class CropFarm implements Farm {
     int currency;
     int level;
     int farmers;
-    int herdSkill;
     int cropSkill;
     int moneySkill;
 
-    public HybridFarm() {
+    public CropFarm() {
         Random rand = new Random();
         this.level = 1;
         this.currency = rand.nextInt(400);
         this.farmers = rand.nextInt(6);
-        this.herdSkill = rand.nextInt(2);
-        if (herdSkill == 0) herdSkill++;
-        this.cropSkill = rand.nextInt(2);
+        this.cropSkill = rand.nextInt(3);
         if (cropSkill == 0) cropSkill++;
         this.moneySkill = rand.nextInt(2);
         if (moneySkill == 0) moneySkill++;
     }
 
-    public HybridFarm(int farmers) {
+    public CropFarm(int farmers) {
         Random rand = new Random();
         this.level = 1;
         this.currency = rand.nextInt(400);
         this.farmers = farmers;
-        this.herdSkill = rand.nextInt(1);
-        if (herdSkill == 0) herdSkill++;
-        this.cropSkill = rand.nextInt(1);
+        this.cropSkill = rand.nextInt(2);
         if (cropSkill == 0) cropSkill++;
         this.moneySkill = rand.nextInt(2);
         if (moneySkill == 0) moneySkill++;
@@ -51,22 +44,21 @@ public class HybridFarm implements Farm {
             newFarm = extra;
             this.farmers = this.farmers - extra;
         }
-        this.herdSkill = this.herdSkill + rand.nextInt(2);
+        this.cropSkill = this.cropSkill + rand.nextInt(2);
         this.moneySkill = this.moneySkill + rand.nextInt(2);
         return newFarm;
     }
 
     @Override
     public void printFarm() {
-        System.out.println("This is a Hybrid Farm\n" +
+        System.out.println("This is an Crop Farm\n" +
                 "Currency is currently $" + this.currency +
                 "\nThis farms current level is " + this.level +
                 "\nAn upgrade currently cost $" + this.upgrade +
                 "\nThere are currently " + this.farmers + " farmers" +
                 "\nThe maximum farmer capacity is " + this.capacity +
-                "\nThe herd skill level of this farm is " + this.herdSkill +
-                "\nThe money skill level of this farm is " + this.moneySkill +
                 "\nThe crop skill level of this farm is " + this.cropSkill +
+                "\nThe money skill level of this farm is " + this.moneySkill +
                 "\n");
     }
 }

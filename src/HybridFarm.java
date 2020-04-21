@@ -1,32 +1,35 @@
-package FarmFactory;
-
 import java.util.Random;
 
-public class AnimalFarm implements Farm {
+public class HybridFarm implements Farm {
     int currency;
     int level;
     int farmers;
     int herdSkill;
+    int cropSkill;
     int moneySkill;
 
-    public AnimalFarm() {
+    public HybridFarm() {
         Random rand = new Random();
         this.level = 1;
         this.currency = rand.nextInt(400);
         this.farmers = rand.nextInt(6);
-        this.herdSkill = rand.nextInt(3);
+        this.herdSkill = rand.nextInt(2);
         if (herdSkill == 0) herdSkill++;
+        this.cropSkill = rand.nextInt(2);
+        if (cropSkill == 0) cropSkill++;
         this.moneySkill = rand.nextInt(2);
         if (moneySkill == 0) moneySkill++;
     }
 
-    public AnimalFarm(int farmers) {
+    public HybridFarm(int farmers) {
         Random rand = new Random();
         this.level = 1;
         this.currency = rand.nextInt(400);
         this.farmers = farmers;
-        this.herdSkill = rand.nextInt(2);
+        this.herdSkill = rand.nextInt(1);
         if (herdSkill == 0) herdSkill++;
+        this.cropSkill = rand.nextInt(1);
+        if (cropSkill == 0) cropSkill++;
         this.moneySkill = rand.nextInt(2);
         if (moneySkill == 0) moneySkill++;
     }
@@ -53,7 +56,7 @@ public class AnimalFarm implements Farm {
 
     @Override
     public void printFarm() {
-        System.out.println("This is an Animal Farm\n" +
+        System.out.println("This is a Hybrid Farm\n" +
                 "Currency is currently $" + this.currency +
                 "\nThis farms current level is " + this.level +
                 "\nAn upgrade currently cost $" + this.upgrade +
@@ -61,6 +64,7 @@ public class AnimalFarm implements Farm {
                 "\nThe maximum farmer capacity is " + this.capacity +
                 "\nThe herd skill level of this farm is " + this.herdSkill +
                 "\nThe money skill level of this farm is " + this.moneySkill +
+                "\nThe crop skill level of this farm is " + this.cropSkill +
                 "\n");
     }
 }
