@@ -38,7 +38,7 @@ public class AnimalFarm implements Farm {
     public int tickFarm() {
         int newFarm = 0;
         Random rand = new Random();
-        currency = currency + rand.nextInt(moneySkill*100);
+        if ((cycles%2)==0) currency = currency + rand.nextInt(moneySkill*100);
         if (currency > upgrade) {
             level++;
             currency = currency - upgrade;

@@ -43,7 +43,7 @@ public class HybridFarm implements Farm {
     public int tickFarm() {
         int newFarm = 0;
         Random rand = new Random();
-        this.currency = this.currency + rand.nextInt(this.moneySkill*100);
+        if ((cycles%2)==0) currency = currency + rand.nextInt(moneySkill*100);
         if (this.currency > this.upgrade) {
             level++;
             currency = currency - upgrade;
