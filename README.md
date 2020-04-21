@@ -2,7 +2,7 @@
 
 
 
-#Plan
+Plan
 
 
 Implement four design patterns together
