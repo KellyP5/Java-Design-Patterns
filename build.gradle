@@ -1,17 +1,13 @@
 plugins {
-  id 'org.ajoberstar.grgit' version '4.0.1'
   id "com.github.spotbugs" version "3.0.0"
   id "checkstyle"
 }
 
 apply plugin: 'application'
-apply plugin: 'java'
+apply plugin: 'jacoco'
+
 
 mainClassName = 'Universum'
-
-compileJava.options.encoding = 'UTF-8'
-//compileJava.options.encoding = "Windows-1252"
-
 
 sourceSets {
   main {
@@ -21,21 +17,20 @@ sourceSets {
   }
 }
 
-
-// Repositories and dependencies for code go here
+// In this section you declare where to find the dependencies of your project
 repositories {
-  mavenCentral()
   jcenter()
 }
 
+// In this section you declare the dependencies for your production and test code
 dependencies {
-  compile 'com.io7m.xom:xom:1.2.+'
-  compile 'net.sourceforge.nekohtml:nekohtml:1.9.+'
-  compile 'org.json:json:20190722'
-  compile group:'org.xerial', name:'sqlite-jdbc', version:'3.30.1'
   compile "junit:junit:4.12"
+  compile files('cls/')
 }
 
+///////////////////////////////////////////////////////////////////////
+// Configure Checkstyle
+/////////////////////////////////////////////////////////////////////
 apply plugin: 'checkstyle'
 checkstyle {
   ignoreFailures = true
@@ -52,6 +47,11 @@ checkstyle {
   toolVersion = "8.8"
 }
 
+
+//////////////////////////////////////////////////////////////////////////
+// Configure SpotBugs
+//////////////////////////////////////////////////////////////////////////
+// To generate an HTML report instead of XML
 tasks.withType(com.github.spotbugs.SpotBugsTask) {
   reports {
     xml.enabled = false
@@ -60,35 +60,5 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
 }
 
 spotbugs {
-  ignoreFailures = true
+  toolVersion = '4.0.1'
 }
-
-
-task updateBuildAndVersion(type: WriteProperties) {
-
-  mkdir "build/" // In case a gradle clean is done, recreate the build directory
-  outputFile = file('build/gradle.properties')
-  Properties props = new Properties()
-
-  if (!outputFile.exists()) {
-    props['build'] = "1.0.0"
-    String versionId = "1.0.${grgit.head().abbreviatedId}"
-    props['version'] = versionId
-    props.store(outputFile.newWriter(), null)
-    
-  }
-
-  if (outputFile.canRead()) {
-    props.load(new FileInputStream(outputFile))
-    def buildString = props['build']
-    String minor=buildString.substring(buildString.lastIndexOf('.')+1)
-    def m=minor.toInteger()+1
-    String major=buildString.substring(0, buildString.lastIndexOf("."));
-    def finalString = major + "." + m
-    property 'build', finalString
-
-    property 'version', "1.0.${grgit.head().abbreviatedId}"
-  }
-}
-
-run.dependsOn updateBuildAndVersion
