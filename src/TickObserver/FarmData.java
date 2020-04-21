@@ -36,6 +36,7 @@ public class FarmData implements Subject {
                 registerObserver(farmFactory.getFarm(farmers));
                 System.out.println("Farm " + i + " Became full. Creating new farm");
             }
+            System.out.println("\n Farm " + i);
             observerList.get(i).printFarm();
         }
         System.out.println("\nDaytime has passed on day " + days + "\n");
@@ -49,6 +50,7 @@ public class FarmData implements Subject {
                 registerObserver(farmFactory.getFarm(farmers));
                 System.out.println("Farm " + i + " Became full. Creating new farm");
             }
+            System.out.println("\n Farm " + i);
             observerList.get(i).printFarm();
         }
         System.out.println("\nNight time has passed on day " + days + "\n");
