@@ -1,9 +1,6 @@
 package BarnCropDecorator;
 
-public class BarnCropDecorator {
-    private int horse, chicken, sheep, cow, pigs;
-    private int corn, potato, tomato, flour;
-
+public class Crop extends BarnCropDecorator {
     void initDecorator(int cropLvl, int herdLvl){
 
     }
