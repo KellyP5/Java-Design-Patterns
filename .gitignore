@@ -18,14 +18,6 @@
 *.tar.gz
 *.rar
 
-### Gradle ###
-.gradle
-/build/
-/caches/
-/daemon/
-/native/
-/wrapper/
-
 # Intellij
 .idea/
 *.iml
