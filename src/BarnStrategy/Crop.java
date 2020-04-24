@@ -3,7 +3,7 @@ package BarnStrategy;
 public class Crop implements Strategy {
 
     @Override
-    public void initDecorator(int cropLvl, int herdLvl) {
+    public void init(int cropLvl, int herdLvl) {
 
     }
 

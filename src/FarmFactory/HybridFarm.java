@@ -1,5 +1,7 @@
 package FarmFactory;
 
+import BarnStrategy.HybridBarn;
+
 import java.util.Random;
 
 public class HybridFarm implements Farm {
@@ -10,6 +12,7 @@ public class HybridFarm implements Farm {
     private int cropSkill;
     private int moneySkill;
     private int cycles;
+    private HybridBarn hb;
 
     public HybridFarm() {
         Random rand = new Random();
@@ -23,6 +26,8 @@ public class HybridFarm implements Farm {
         if (cropSkill == 0) cropSkill++;
         moneySkill = rand.nextInt(2);
         if (moneySkill == 0) moneySkill++;
+        hb = new HybridBarn();
+        hb.init(cropSkill, herdSkill);
     }
 
     public HybridFarm(int farmers) {
@@ -56,6 +61,13 @@ public class HybridFarm implements Farm {
         }
         this.herdSkill = this.herdSkill + rand.nextInt(2);
         this.moneySkill = this.moneySkill + rand.nextInt(2);
+        if ((cycles%2) == 0) {
+            int cash = (int)((double)currency * .10);
+            currency = currency - cash;
+            hb.ageDay(cropSkill, herdSkill, cash);
+        } else {
+            hb.ageNight(cropSkill, herdSkill, 0);
+        }
         cycles++;
         return newFarm;
     }
