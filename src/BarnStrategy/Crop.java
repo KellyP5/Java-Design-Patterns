@@ -5,7 +5,6 @@ import java.util.Random;
 public class Crop implements Strategy {
     int corn, tobacco, potato;
     int cash, cycles;
-    boolean day;
     boolean cropPredator;
 
     @Override
@@ -14,7 +13,6 @@ public class Crop implements Strategy {
         tobacco = cropLvl;
         potato = cropLvl;
         cash = 0;
-        day = true;
         cropPredator = false;
     }
 

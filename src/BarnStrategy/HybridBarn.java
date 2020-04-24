@@ -6,7 +6,6 @@ public class HybridBarn implements Strategy {
     int horse, cow, pig, chicken, dog;
     int corn, tobacco, potato;
     int cash, cycles;
-    boolean day;
     boolean animalPredator, cropPredator;
 
     @Override
@@ -20,7 +19,6 @@ public class HybridBarn implements Strategy {
         tobacco = cropLvl;
         potato = cropLvl;
         cash = 0;
-        day = true;
         animalPredator = false;
         cropPredator = false;
     }

@@ -5,7 +5,6 @@ import java.util.Random;
 public class Barn implements Strategy {
     int horse, cow, pig, chicken, dog;
     int cash, cycles;
-    boolean day;
     boolean animalPredator;
 
     @Override
@@ -16,7 +15,6 @@ public class Barn implements Strategy {
         chicken = herdLvl;
         dog = herdLvl;
         cash = 0;
-        day = true;
         animalPredator = false;
     }
 
