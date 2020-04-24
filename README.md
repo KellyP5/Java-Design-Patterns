@@ -1,7 +1,7 @@
 # SER316 Design Patterns Plan
 
-
-Implement four design patterns together
+#ScreenCast
+https://youtu.be/pfz02icI90Q
 
 - Factory pattern for farms
   Requirements Fullfilled by Factory Pattern
