@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="FarmTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2020-04-24T20:03:47" hostname="kellys-MacBook-Pro.local" time="0.001">
+  <properties/>
+  <testcase name="StrategyTest" classname="FarmTest" time="0.001"/>
+  <testcase name="ObserverTest" classname="FarmTest" time="0.0"/>
+  <testcase name="FactoryTest" classname="FarmTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
