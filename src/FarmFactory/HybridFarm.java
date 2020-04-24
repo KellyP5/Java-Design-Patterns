@@ -42,6 +42,8 @@ public class HybridFarm implements Farm {
         if (cropSkill == 0) cropSkill++;
         moneySkill = rand.nextInt(2);
         if (moneySkill == 0) moneySkill++;
+        hb = new HybridBarn();
+        hb.init(cropSkill, herdSkill);
     }
 
     @Override
@@ -62,9 +64,9 @@ public class HybridFarm implements Farm {
         this.herdSkill = this.herdSkill + rand.nextInt(2);
         this.moneySkill = this.moneySkill + rand.nextInt(2);
         if ((cycles%2) == 0) {
-            int cash = (int)((double)currency * .10);
+            int cash = (int)((double)currency * .5);
+            hb.ageDay(cropSkill, herdSkill, currency - cash);
             currency = currency - cash;
-            hb.ageDay(cropSkill, herdSkill, cash);
         } else {
             hb.ageNight(cropSkill, herdSkill, 0);
         }
@@ -84,5 +86,6 @@ public class HybridFarm implements Farm {
                 "\nThe money skill level of this farm is " + this.moneySkill +
                 "\nThe crop skill level of this farm is " + this.cropSkill +
                 "\nThis farm has existed for " + cycles/2 + " days\n");
+        hb.print();
     }
 }

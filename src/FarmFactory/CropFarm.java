@@ -1,5 +1,7 @@
 package FarmFactory;
 
+import BarnStrategy.Crop;
+
 import java.util.Random;
 
 public class CropFarm implements Farm {
@@ -9,6 +11,7 @@ public class CropFarm implements Farm {
     int cropSkill;
     int moneySkill;
     int cycles;
+    Crop crops;
 
     public CropFarm() {
         Random rand = new Random();
@@ -20,6 +23,8 @@ public class CropFarm implements Farm {
         if (cropSkill == 0) cropSkill++;
         this.moneySkill = rand.nextInt(2);
         if (moneySkill == 0) moneySkill++;
+        crops = new Crop();
+        crops.init(cropSkill, 0);
     }
 
     public CropFarm(int farmers) {
@@ -32,6 +37,8 @@ public class CropFarm implements Farm {
         if (cropSkill == 0) cropSkill++;
         moneySkill = rand.nextInt(2);
         if (moneySkill == 0) moneySkill++;
+        crops = new Crop();
+        crops.init(cropSkill, 0);
     }
 
     @Override
@@ -51,6 +58,13 @@ public class CropFarm implements Farm {
         }
         this.cropSkill = this.cropSkill + rand.nextInt(2);
         this.moneySkill = this.moneySkill + rand.nextInt(2);
+        if ((cycles%2) == 0) {
+            int cash = (int)((double)currency * .5);
+            crops.ageDay(cropSkill, 0, currency - cash);
+            currency = currency - cash;
+        } else {
+            crops.ageNight(cropSkill, 0, 0);
+        }
         cycles++;
         return newFarm;
     }
@@ -66,5 +80,6 @@ public class CropFarm implements Farm {
                 "\nThe crop skill level of this farm is " + this.cropSkill +
                 "\nThe money skill level of this farm is " + this.moneySkill +
                 "\nThis farm has existed for " + cycles/2 + " days\n");
+        crops.print();
     }
 }

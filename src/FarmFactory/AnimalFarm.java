@@ -1,5 +1,7 @@
 package FarmFactory;
 
+import BarnStrategy.Barn;
+
 import java.util.Random;
 
 public class AnimalFarm implements Farm {
@@ -9,6 +11,7 @@ public class AnimalFarm implements Farm {
     int herdSkill;
     int moneySkill;
     int cycles;
+    Barn barn;
 
     public AnimalFarm() {
         Random rand = new Random();
@@ -20,6 +23,8 @@ public class AnimalFarm implements Farm {
         if (herdSkill == 0) herdSkill++;
         moneySkill = rand.nextInt(2);
         if (moneySkill == 0) moneySkill++;
+        barn = new Barn();
+        barn.init(0, herdSkill);
     }
 
     public AnimalFarm(int farmers) {
@@ -32,6 +37,8 @@ public class AnimalFarm implements Farm {
         if (herdSkill == 0) herdSkill++;
         moneySkill = rand.nextInt(2);
         if (moneySkill == 0) moneySkill++;
+        barn = new Barn();
+        barn.init(0, herdSkill);
     }
 
     @Override
@@ -51,6 +58,13 @@ public class AnimalFarm implements Farm {
         }
         herdSkill = herdSkill + rand.nextInt(2);
         moneySkill = moneySkill + rand.nextInt(2);
+        if ((cycles%2) == 0) {
+            int cash = (int)((double)currency * .5);
+            barn.ageDay(0, herdSkill, currency - cash);
+            currency = currency - cash;
+        } else {
+            barn.ageNight(0, herdSkill, 0);
+        }
         cycles++;
         return newFarm;
     }
@@ -66,5 +80,6 @@ public class AnimalFarm implements Farm {
                 "\nThe herd skill level of this farm is " + herdSkill +
                 "\nThe money skill level of this farm is " + moneySkill +
                 "\nThis farm has existed for " + cycles/2 + " days\n");
+        barn.print();
     }
 }
