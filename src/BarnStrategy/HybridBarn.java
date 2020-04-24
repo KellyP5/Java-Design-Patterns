@@ -21,6 +21,7 @@ public class HybridBarn implements Strategy {
         cash = 0;
         animalPredator = false;
         cropPredator = false;
+        cycles = 0;
     }
 
     @Override

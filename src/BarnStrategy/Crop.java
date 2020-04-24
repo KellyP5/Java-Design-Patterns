@@ -14,6 +14,7 @@ public class Crop implements Strategy {
         potato = cropLvl;
         cash = 0;
         cropPredator = false;
+        cycles = 0;
     }
 
     @Override
@@ -45,7 +46,7 @@ public class Crop implements Strategy {
             }
         }
 
-        if ((cycles % 2) == 0) {
+        if ((cycles % 3) == 0) {
             for (int i=0; i<cropLvl; i++) {
                 corn ++;
                 tobacco++;

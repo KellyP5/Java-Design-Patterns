@@ -16,6 +16,7 @@ public class Barn implements Strategy {
         dog = herdLvl;
         cash = 0;
         animalPredator = false;
+        cycles = 0;
     }
 
     @Override
@@ -51,7 +52,7 @@ public class Barn implements Strategy {
             }
         }
 
-        if ((cycles % 4) == 0) {
+        if ((cycles % 3) == 0) {
             for (int i=0; i <herdLvl; i++) {
                 if (horse > 1) horse++;
                 if (cow > 1) cow ++;
