@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FarmData.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SER316DesignPatterns</a> &gt; <a href="index.source.html" class="el_package">TickObserver</a> &gt; <span class="el_source">FarmData.java</span></div><h1>FarmData.java</h1><pre class="source lang-java linenums">package TickObserver;
+
+import FarmFactory.Farm;
+import FarmFactory.FarmFactory;
+import TickObserver.Subject;
+
+import java.util.ArrayList;
+
+public class FarmData implements Subject {
+    private ArrayList&lt;Farm&gt; observerList;
+    private FarmFactory farmFactory;
+    private int days;
+
+<span class="fc" id="L14">    public FarmData() {</span>
+<span class="fc" id="L15">        observerList = new ArrayList&lt;Farm&gt;();</span>
+<span class="fc" id="L16">        farmFactory = new FarmFactory();</span>
+<span class="fc" id="L17">        observerList.add(farmFactory.getFarm());</span>
+<span class="fc" id="L18">        observerList.get(0).printFarm();</span>
+<span class="fc" id="L19">        days = 0;</span>
+<span class="fc" id="L20">    }</span>
+
+    public ArrayList&lt;Farm&gt; getFarms() {
+<span class="fc" id="L23">        return observerList;</span>
+    }
+
+    @Override
+    public void registerObserver(Farm f) {
+<span class="fc" id="L28">        observerList.add(f);</span>
+<span class="fc" id="L29">    }</span>
+
+    @Override
+    public void notifyObserversDay() {
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        for (int i = 0; i &lt; observerList.size(); i++) {</span>
+<span class="fc" id="L34">            int farmers = observerList.get(i).tickFarm();</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">            if (farmers != 0) {</span>
+<span class="fc" id="L36">                registerObserver(farmFactory.getFarm(farmers));</span>
+<span class="fc" id="L37">                System.out.println(&quot;Farm &quot; + i + &quot; Became full. Creating new farm&quot;);</span>
+            }
+<span class="fc" id="L39">            System.out.println(&quot;\n Farm &quot; + i);</span>
+<span class="fc" id="L40">            observerList.get(i).printFarm();</span>
+        }
+<span class="fc" id="L42">        System.out.println(&quot;\nDaytime has passed on day &quot; + days + &quot;\n&quot;);</span>
+<span class="fc" id="L43">    }</span>
+
+    @Override
+    public void notifyObserversNight() {
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        for (int i = 0; i &lt; observerList.size(); i++) {</span>
+<span class="fc" id="L48">            int farmers = observerList.get(i).tickFarm();</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">            if (farmers != 0) {</span>
+<span class="fc" id="L50">                registerObserver(farmFactory.getFarm(farmers));</span>
+<span class="fc" id="L51">                System.out.println(&quot;Farm &quot; + i + &quot; Became full. Creating new farm&quot;);</span>
+            }
+<span class="fc" id="L53">            System.out.println(&quot;\n Farm &quot; + i);</span>
+<span class="fc" id="L54">            observerList.get(i).printFarm();</span>
+        }
+<span class="fc" id="L56">        System.out.println(&quot;\nNight time has passed on day &quot; + days + &quot;\n&quot;);</span>
+<span class="fc" id="L57">        days++;</span>
+<span class="fc" id="L58">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

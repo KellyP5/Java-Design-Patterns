@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HybridBarn.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SER316DesignPatterns</a> &gt; <a href="index.source.html" class="el_package">BarnStrategy</a> &gt; <span class="el_source">HybridBarn.java</span></div><h1>HybridBarn.java</h1><pre class="source lang-java linenums">package BarnStrategy;
+
+import java.util.Random;
+
+<span class="fc" id="L5">public class HybridBarn implements Strategy {</span>
+    int horse, cow, pig, chicken, dog;
+    int corn, tobacco, potato;
+    int cash, cycles;
+    boolean animalPredator, cropPredator;
+
+    @Override
+    public void init(int cropLvl, int herdLvl) {
+<span class="fc" id="L13">        horse = herdLvl;</span>
+<span class="fc" id="L14">        cow = herdLvl;</span>
+<span class="fc" id="L15">        pig = herdLvl;</span>
+<span class="fc" id="L16">        chicken = herdLvl;</span>
+<span class="fc" id="L17">        dog = herdLvl;</span>
+<span class="fc" id="L18">        corn = cropLvl;</span>
+<span class="fc" id="L19">        tobacco = cropLvl;</span>
+<span class="fc" id="L20">        potato = cropLvl;</span>
+<span class="fc" id="L21">        cash = 0;</span>
+<span class="fc" id="L22">        animalPredator = false;</span>
+<span class="fc" id="L23">        cropPredator = false;</span>
+<span class="fc" id="L24">        cycles = 0;</span>
+<span class="fc" id="L25">    }</span>
+
+    @Override
+    public void ageNight(int cropLvl, int herdLvl, int money) {
+<span class="fc" id="L29">        cycles++;</span>
+<span class="fc" id="L30">        cash = money + cash;</span>
+<span class="fc" id="L31">        Random rand = new Random();</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (rand.nextInt(10) == 5) {</span>
+<span class="fc" id="L33">            int predator = rand.nextInt(3);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            if (predator == 0) {</span>
+<span class="fc" id="L35">                animalPredator = true;</span>
+<span class="fc" id="L36">                int ran = rand.nextInt(5);</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">                if (ran == 0) {</span>
+<span class="fc" id="L38">                    horse--;</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">                } else if (ran == 1) {</span>
+<span class="fc" id="L40">                    cow--;</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">                } else if (ran == 2) {</span>
+<span class="fc" id="L42">                    pig--;</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">                } else if (ran == 3) {</span>
+<span class="fc" id="L44">                    chicken--;</span>
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">                } else if (ran == 4) {</span>
+<span class="fc" id="L46">                    dog--;</span>
+                }
+<span class="fc bfc" id="L48" title="All 2 branches covered.">            } else if (predator == 1) {</span>
+<span class="fc" id="L49">                cropPredator = true;</span>
+<span class="fc" id="L50">                int ran = rand.nextInt(3);</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">                if (ran == 0) {</span>
+<span class="fc" id="L52">                    corn--;</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">                } else if (ran == 1) {</span>
+<span class="fc" id="L54">                    tobacco--;</span>
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">                } else if (ran == 2) {</span>
+<span class="fc" id="L56">                    potato--;</span>
+                }
+            }
+        }
+
+<span class="fc" id="L61">    }</span>
+
+    @Override
+    public void ageDay(int cropLvl, int herdLvl, int money) {
+<span class="fc" id="L65">        cycles++;</span>
+<span class="fc" id="L66">        cash = money + cash;</span>
+
+<span class="fc bfc" id="L68" title="All 4 branches covered.">        if (animalPredator == true || cropPredator == true) {</span>
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">            if (cash &gt; 50) {</span>
+<span class="fc" id="L70">                animalPredator = false;</span>
+<span class="fc" id="L71">                cropPredator = false;</span>
+            }
+        }
+
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        if ((cycles % 4) == 0) {</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">            for (int i=0; i &lt;herdLvl; i++) {</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">                if (horse &gt; 1) horse++;</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">                if (cow &gt; 1) cow ++;</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">                if (pig &gt; 1) pig ++;</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">                if (chicken &gt; 1) chicken ++;</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">                if (dog &gt; 1) dog++;</span>
+            }
+        }
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        if ((cycles % 2) == 0) {</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">            for (int i=0; i&lt;cropLvl; i++) {</span>
+<span class="fc" id="L86">                corn ++;</span>
+<span class="fc" id="L87">                tobacco++;</span>
+<span class="fc" id="L88">                potato++;</span>
+            }
+        }
+<span class="fc" id="L91">        Random rand = new Random();</span>
+<span class="fc" id="L92">        int ran = rand.nextInt(2);</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        if (ran==0) {</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">            if (cash &gt; 100) {</span>
+<span class="fc" id="L95">                ran = rand.nextInt(5);</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">                if (ran == 0) {</span>
+<span class="fc" id="L97">                    horse++;</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">                } else if (ran == 1) {</span>
+<span class="fc" id="L99">                    cow++;</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">                } else if (ran == 2) {</span>
+<span class="fc" id="L101">                    pig++;</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">                } else if (ran == 3) {</span>
+<span class="fc" id="L103">                    chicken = chicken + 5;</span>
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">                } else if (ran == 4) {</span>
+<span class="fc" id="L105">                    dog = dog + 2;</span>
+                }
+<span class="fc" id="L107">                cash = cash - 100;</span>
+            }
+        } else {
+<span class="fc bfc" id="L110" title="All 2 branches covered.">            if (cash &gt; 100) {</span>
+<span class="fc" id="L111">                ran = rand.nextInt(3);</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">                if (ran == 0) {</span>
+<span class="fc" id="L113">                    corn++;</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">                } else if (ran == 1) {</span>
+<span class="fc" id="L115">                    tobacco++;</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">                } else if (ran == 2) {</span>
+<span class="fc" id="L117">                    potato++;</span>
+                }
+<span class="fc" id="L119">                cash = cash - 100;</span>
+            }
+        }
+
+<span class="fc" id="L123">    }</span>
+
+    @Override
+    public void print() {
+<span class="fc" id="L127">        System.out.println(&quot;This is a Hybrid Barn, it has crops and animals&quot; +</span>
+                &quot;\nHorse:&quot;+horse+&quot; cow:&quot;+cow+&quot; pig:&quot;+pig+&quot; chicken:&quot;+chicken+
+                &quot; dog:&quot;+dog+&quot;\nacres of corn:&quot;+corn+&quot; tobacco:&quot;+tobacco+&quot; potato:&quot;+
+                potato+&quot;\nAre there crop predators? &quot; + cropPredator+
+                &quot;\nAre there animal predators? &quot; + animalPredator);
+<span class="fc" id="L132">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HybridFarm.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SER316DesignPatterns</a> &gt; <a href="index.source.html" class="el_package">FarmFactory</a> &gt; <span class="el_source">HybridFarm.java</span></div><h1>HybridFarm.java</h1><pre class="source lang-java linenums">package FarmFactory;
+
+import BarnStrategy.HybridBarn;
+
+import java.util.Random;
+
+public class HybridFarm implements Farm {
+    private int currency;
+    private int level;
+    private int farmers;
+    private int herdSkill;
+    private int cropSkill;
+    private int moneySkill;
+    private int cycles;
+    private HybridBarn hb;
+
+<span class="fc" id="L17">    public HybridFarm() {</span>
+<span class="fc" id="L18">        Random rand = new Random();</span>
+<span class="fc" id="L19">        level = 1;</span>
+<span class="fc" id="L20">        cycles = 0;</span>
+<span class="fc" id="L21">        currency = rand.nextInt(400);</span>
+<span class="fc" id="L22">        farmers = rand.nextInt(6);</span>
+<span class="fc" id="L23">        herdSkill = rand.nextInt(2);</span>
+<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if (herdSkill == 0) herdSkill++;</span>
+<span class="fc" id="L25">        cropSkill = rand.nextInt(2);</span>
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if (cropSkill == 0) cropSkill++;</span>
+<span class="fc" id="L27">        moneySkill = rand.nextInt(2);</span>
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        if (moneySkill == 0) moneySkill++;</span>
+<span class="fc" id="L29">        hb = new HybridBarn();</span>
+<span class="fc" id="L30">        hb.init(cropSkill, herdSkill);</span>
+<span class="fc" id="L31">    }</span>
+
+<span class="fc" id="L33">    public HybridFarm(int farmers) {</span>
+<span class="fc" id="L34">        Random rand = new Random();</span>
+<span class="fc" id="L35">        level = 1;</span>
+<span class="fc" id="L36">        cycles = 0;</span>
+<span class="fc" id="L37">        currency = rand.nextInt(400);</span>
+<span class="fc" id="L38">        this.farmers = farmers;</span>
+<span class="fc" id="L39">        herdSkill = rand.nextInt(2);</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (herdSkill == 0) herdSkill++;</span>
+<span class="fc" id="L41">        cropSkill = rand.nextInt(2);</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (cropSkill == 0) cropSkill++;</span>
+<span class="fc" id="L43">        moneySkill = rand.nextInt(2);</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (moneySkill == 0) moneySkill++;</span>
+<span class="fc" id="L45">        hb = new HybridBarn();</span>
+<span class="fc" id="L46">        hb.init(cropSkill, herdSkill);</span>
+<span class="fc" id="L47">    }</span>
+
+    @Override
+    public int tickFarm() {
+<span class="fc" id="L51">        int newFarm = 0;</span>
+<span class="fc" id="L52">        Random rand = new Random();</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if ((cycles%2)==0) currency = currency + rand.nextInt(moneySkill*100);</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        if (this.currency &gt; this.upgrade) {</span>
+<span class="fc" id="L55">            level++;</span>
+<span class="fc" id="L56">            currency = currency - upgrade;</span>
+        }
+<span class="fc" id="L58">        this.farmers = farmers + rand.nextInt(3);</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (this.farmers &gt; capacity) {</span>
+<span class="fc" id="L60">            int extra = this.farmers % 10;</span>
+<span class="fc" id="L61">            newFarm = extra;</span>
+<span class="fc" id="L62">            this.farmers = this.farmers - extra;</span>
+        }
+<span class="fc" id="L64">        this.herdSkill = this.herdSkill + rand.nextInt(2);</span>
+<span class="fc" id="L65">        this.moneySkill = this.moneySkill + rand.nextInt(2);</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if ((cycles%2) == 0) {</span>
+<span class="fc" id="L67">            int cash = (int)((double)currency * .5);</span>
+<span class="fc" id="L68">            hb.ageDay(cropSkill, herdSkill, currency - cash);</span>
+<span class="fc" id="L69">            currency = currency - cash;</span>
+<span class="fc" id="L70">        } else {</span>
+<span class="fc" id="L71">            hb.ageNight(cropSkill, herdSkill, 0);</span>
+        }
+<span class="fc" id="L73">        cycles++;</span>
+<span class="fc" id="L74">        return newFarm;</span>
+    }
+
+    @Override
+    public void printFarm() {
+<span class="fc" id="L79">        System.out.println(&quot;This is a Hybrid Farm\n&quot; +</span>
+                &quot;Currency is currently $&quot; + this.currency +
+                &quot;\nThis farms current level is &quot; + this.level +
+                &quot;\nAn upgrade currently cost $&quot; + this.upgrade +
+                &quot;\nThere are currently &quot; + this.farmers + &quot; farmers&quot; +
+                &quot;\nThe maximum farmer capacity is &quot; + this.capacity +
+                &quot;\nThe herd skill level of this farm is &quot; + this.herdSkill +
+                &quot;\nThe money skill level of this farm is &quot; + this.moneySkill +
+                &quot;\nThe crop skill level of this farm is &quot; + this.cropSkill +
+                &quot;\nThis farm has existed for &quot; + cycles/2 + &quot; days\n&quot;);
+<span class="fc" id="L89">        hb.print();</span>
+<span class="fc" id="L90">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
