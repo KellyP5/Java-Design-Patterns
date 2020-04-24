@@ -17,6 +17,9 @@ Implement four design patterns together
   - New farms are created when a farm reaches greater than 10 population
   - Notifies all farms of day or night rotation, leveling up, gaining farmers, and increasing gold.
   
-- Decorator to define currency and product increases dynamically
+- Strategy Pattern to define the Barn and Crops
+  - Crops are harvested every 3 days
+  - Predators come out at night and kill animals or crops at a 10% chance
+  - Animals breed every 4 cycles if there are two and they aren't killed
+  - 10% of money is saved and either spent on animals or crops depending on the farm
 
-- Builder will be used to represent the animals throughout the farms
