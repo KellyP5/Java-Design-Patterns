@@ -5,11 +5,17 @@ import farmfactory.FarmFactory;
 
 import java.util.ArrayList;
 
+/**
+ * Farm data for observer strategy.
+ */
 public class FarmData implements Subject {
     private ArrayList<Farm> observerList;
     private FarmFactory farmFactory;
     private int days;
 
+    /**
+     * Instantiates the farm data list.
+     */
     public FarmData() {
         observerList = new ArrayList<Farm>();
         farmFactory = new FarmFactory();
@@ -18,15 +24,26 @@ public class FarmData implements Subject {
         days = 0;
     }
 
+    /**
+     * Returns the farms as an arraylist.
+     * @return ArrayList
+     */
     public ArrayList<Farm> getFarms() {
         return observerList;
     }
 
+    /**
+     * Adds an observer to the list.
+     * @param f farm to add
+     */
     @Override
     public void registerObserver(Farm f) {
         observerList.add(f);
     }
 
+    /**
+     * Notifies the observers of a day passing.
+     */
     @Override
     public void notifyObserversDay() {
         for (int i = 0; i < observerList.size(); i++) {
@@ -41,6 +58,9 @@ public class FarmData implements Subject {
         System.out.println("\nDaytime has passed on day " + days + "\n");
     }
 
+    /**
+     * Notifies the observers of a night passing.
+     */
     @Override
     public void notifyObserversNight() {
         for (int i = 0; i < observerList.size(); i++) {

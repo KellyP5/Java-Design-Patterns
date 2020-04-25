@@ -2,8 +2,15 @@ package farmfactory;
 
 import java.util.Random;
 
+/**
+ * Farm Factory class.
+ */
 public class FarmFactory {
 
+    /**
+     * Gets the farm.
+     * @return farm
+     */
     public Farm getFarm() {
         Random rand = new Random();
         int i = rand.nextInt(2);
@@ -18,6 +25,11 @@ public class FarmFactory {
         return farm;
     }
 
+    /**
+     * Gets farm based on input.
+     * @param f which farm to get
+     * @return farm
+     */
     public Farm getFarm(int f) {
         Random rand = new Random();
         int i = rand.nextInt(3);

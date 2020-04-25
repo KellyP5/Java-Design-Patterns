@@ -1,17 +1,18 @@
-import org.junit.BeforeClass;
-import org.junit.Test;
-import barnstrategy.*;
-import farmfactory.*;
-import tickobserver.*;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-
+import org.junit.BeforeClass;
+import org.junit.Test;
 import static org.junit.Assert.*;
+import barnstrategy.*;
+import farmfactory.*;
+import tickobserver.*;
 
+/**
+ * Test class to test all of the farms.
+ */
 public class FarmTest {
     private static Barn barn;
     private static Crop crops;
@@ -22,6 +23,9 @@ public class FarmTest {
     private static HybridFarm hybridFarm;
     private static FarmData farmData;
 
+    /**
+     * Sets up the test for the farms.
+     */
     @BeforeClass
     public static void setUp() {
         barn = new Barn();
@@ -39,9 +43,12 @@ public class FarmTest {
         farmData = new FarmData();
     }
 
+    /**
+     * Tests the strategy component.
+     */
     @Test
     public void strategyTest() {
-        for (int i=0; i<100; i++) {
+        for (int i = 0; i < 100; i++) {
             barn.ageDay(0, 5, 10000);
             barn.ageNight(0, 5, 10000);
             crops.ageDay(5, 0, 10000);
@@ -57,6 +64,9 @@ public class FarmTest {
         assertNotNull(barn);
     }
 
+    /**
+     * Tests the factory component.
+     */
     @Test
     public void factoryTest() {
         Farm farm;
@@ -70,12 +80,15 @@ public class FarmTest {
         assertNotNull(farm);
     }
 
+    /**
+     * Tests the observer component.
+     */
     @Test
     public void observerTest() {
         farmData.registerObserver(hybridFarm);
         farmData.registerObserver(cropFarm);
         farmData.registerObserver(animalFarm);
-        for (int i=0; i<5; i++) {
+        for (int i = 0; i < 5; i++) {
             farmData.notifyObserversDay();
             farmData.notifyObserversNight();
         }
@@ -85,6 +98,10 @@ public class FarmTest {
         assertEquals(size, farms.size());
     }
 
+    /**
+     * Tests main.
+     * @throws IOException for input
+     */
     @Test public void testMain() throws IOException {
         System.out.println("main");
         String test = "test";

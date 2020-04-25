@@ -1,8 +1,12 @@
 package farmfactory;
 
+/**
+ * Interface for the farm factories.
+ */
 public interface Farm {
-    final static int upgrade = 1200;
-    final static int capacity = 10;
+    int upgrade = 1200;
+    int capacity = 10;
     int tickFarm();
+
     void printFarm();
 }

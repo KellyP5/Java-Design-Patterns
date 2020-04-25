@@ -4,6 +4,9 @@ import barnstrategy.Barn;
 
 import java.util.Random;
 
+/**
+ * Animal farm farm factory.
+ */
 public class AnimalFarm implements Farm {
     int currency;
     int level;
@@ -13,6 +16,9 @@ public class AnimalFarm implements Farm {
     int cycles;
     Barn barn;
 
+    /**
+     * Instantiates an animal farm.
+     */
     public AnimalFarm() {
         Random rand = new Random();
         level = 1;
@@ -20,13 +26,21 @@ public class AnimalFarm implements Farm {
         currency = rand.nextInt(400);
         farmers = rand.nextInt(6);
         herdSkill = rand.nextInt(3);
-        if (herdSkill == 0) herdSkill++;
+        if (herdSkill == 0) {
+            herdSkill++;
+        }
         moneySkill = rand.nextInt(2);
-        if (moneySkill == 0) moneySkill++;
+        if (moneySkill == 0) {
+            moneySkill++;
+        }
         barn = new Barn();
         barn.init(0, herdSkill);
     }
 
+    /**
+     * Instantiates an animal farm based on number of farmers.
+     * @param farmers number of farmers
+     */
     public AnimalFarm(int farmers) {
         Random rand = new Random();
         level = 1;
@@ -34,18 +48,29 @@ public class AnimalFarm implements Farm {
         currency = rand.nextInt(400);
         this.farmers = farmers;
         herdSkill = rand.nextInt(2);
-        if (herdSkill == 0) herdSkill++;
+        if (herdSkill == 0) {
+            herdSkill++;
+        }
         moneySkill = rand.nextInt(2);
-        if (moneySkill == 0) moneySkill++;
+        if (moneySkill == 0) {
+            moneySkill++;
+        }
         barn = new Barn();
         barn.init(0, herdSkill);
     }
 
+    /**
+     * Tickets farm from observer. upgrades, increases money,
+     * ages the barn, changes by day or night.
+     * @return number of new farms created
+     */
     @Override
     public int tickFarm() {
         int newFarm = 0;
         Random rand = new Random();
-        if ((cycles%2)==0) currency = currency + rand.nextInt(moneySkill*100);
+        if ((cycles % 2) == 0) {
+            currency = currency + rand.nextInt(moneySkill * 100);
+        }
         if (currency > upgrade) {
             level++;
             currency = currency - upgrade;
@@ -58,7 +83,7 @@ public class AnimalFarm implements Farm {
         }
         herdSkill = herdSkill + rand.nextInt(2);
         moneySkill = moneySkill + rand.nextInt(2);
-        if ((cycles%2) == 0) {
+        if ((cycles % 2) == 0) {
             int cash = (int)((double)currency * .5);
             barn.ageDay(0, herdSkill, currency - cash);
             currency = currency - cash;
@@ -69,17 +94,28 @@ public class AnimalFarm implements Farm {
         return newFarm;
     }
 
+    /**
+     * Prints the current farms state.
+     */
     @Override
     public void printFarm() {
-        System.out.println("This is an Animal Farm\n" +
-                "Currency is currently $" + currency +
-                "\nThis farms current level is " + level +
-                "\nAn upgrade currently cost $" + upgrade +
-                "\nThere are currently " + farmers + " farmers" +
-                "\nThe maximum farmer capacity is " + capacity +
-                "\nThe herd skill level of this farm is " + herdSkill +
-                "\nThe money skill level of this farm is " + moneySkill +
-                "\nThis farm has existed for " + cycles/2 + " days\n");
+        System.out.println("This is an Animal Farm\n"
+                +
+                "Currency is currently $" + currency
+                +
+                "\nThis farms current level is " + level
+                +
+                "\nAn upgrade currently cost $" + upgrade
+                +
+                "\nThere are currently " + farmers + " farmers"
+                +
+                "\nThe maximum farmer capacity is " + capacity
+                +
+                "\nThe herd skill level of this farm is " + herdSkill
+                +
+                "\nThe money skill level of this farm is " + moneySkill
+                +
+                "\nThis farm has existed for " + cycles / 2 + " days\n");
         barn.print();
     }
 }
