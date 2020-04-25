@@ -1,6 +1,6 @@
-package FarmFactory;
+package farmfactory;
 
-import BarnStrategy.Crop;
+import barnstrategy.Crop;
 
 import java.util.Random;
 

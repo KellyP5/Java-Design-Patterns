@@ -1,8 +1,7 @@
-package TickObserver;
+package tickobserver;
 
-import FarmFactory.Farm;
-import FarmFactory.FarmFactory;
-import TickObserver.Subject;
+import farmfactory.Farm;
+import farmfactory.FarmFactory;
 
 import java.util.ArrayList;
 

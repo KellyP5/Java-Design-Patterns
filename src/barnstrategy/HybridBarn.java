@@ -1,13 +1,29 @@
-package BarnStrategy;
+package barnstrategy;
 
 import java.util.Random;
 
+/**
+ * Barn class for generating a barn with animals.
+ */
 public class HybridBarn implements Strategy {
-    int horse, cow, pig, chicken, dog;
-    int corn, tobacco, potato;
-    int cash, cycles;
-    boolean animalPredator, cropPredator;
+    int horse;
+    int cow;
+    int pig;
+    int chicken;
+    int dog;
+    int corn;
+    int tobacco;
+    int potato;
+    int cash;
+    int cycles;
+    boolean animalPredator;
+    boolean cropPredator;
 
+    /**
+     * Initializer for hybridbarn class, sets defaults for barn.
+     * @param cropLvl current crop level
+     * @param herdLvl current herd level
+     */
     @Override
     public void init(int cropLvl, int herdLvl) {
         horse = herdLvl;
@@ -24,6 +40,14 @@ public class HybridBarn implements Strategy {
         cycles = 0;
     }
 
+    /**
+     * Ages the barn by night, 10% chance of generating
+     * a predator. Saves cash amount. If predator,
+     * takes out animal/plants.
+     * @param cropLvl current crop level
+     * @param herdLvl current herd level
+     * @param money current money to store
+     */
     @Override
     public void ageNight(int cropLvl, int herdLvl, int money) {
         cycles++;
@@ -60,6 +84,14 @@ public class HybridBarn implements Strategy {
 
     }
 
+    /**
+     * Ages by daytime, tries to pay to remove predatory
+     * if there is enough money. Also, tries to buy more
+     * animals/plants with money saved.
+     * @param cropLvl current crop level
+     * @param herdLvl current herd level
+     * @param money current money to store
+     */
     @Override
     public void ageDay(int cropLvl, int herdLvl, int money) {
         cycles++;
@@ -73,24 +105,34 @@ public class HybridBarn implements Strategy {
         }
 
         if ((cycles % 4) == 0) {
-            for (int i=0; i <herdLvl; i++) {
-                if (horse > 1) horse++;
-                if (cow > 1) cow ++;
-                if (pig > 1) pig ++;
-                if (chicken > 1) chicken ++;
-                if (dog > 1) dog++;
+            for (int i = 0; i < herdLvl; i++) {
+                if (horse > 1) {
+                    horse++;
+                }
+                if (cow > 1) {
+                    cow++;
+                }
+                if (pig > 1) {
+                    pig++;
+                }
+                if (chicken > 1) {
+                    chicken++;
+                }
+                if (dog > 1) {
+                    dog++;
+                }
             }
         }
         if ((cycles % 2) == 0) {
-            for (int i=0; i<cropLvl; i++) {
-                corn ++;
+            for (int i = 0; i < cropLvl; i++) {
+                corn++;
                 tobacco++;
                 potato++;
             }
         }
         Random rand = new Random();
         int ran = rand.nextInt(2);
-        if (ran==0) {
+        if (ran == 0) {
             if (cash > 100) {
                 ran = rand.nextInt(5);
                 if (ran == 0) {
@@ -122,12 +164,15 @@ public class HybridBarn implements Strategy {
 
     }
 
+    /**
+     * Prints the current barn status.
+     */
     @Override
     public void print() {
-        System.out.println("This is a Hybrid Barn, it has crops and animals" +
-                "\nHorse:"+horse+" cow:"+cow+" pig:"+pig+" chicken:"+chicken+
-                " dog:"+dog+"\nacres of corn:"+corn+" tobacco:"+tobacco+" potato:"+
-                potato+"\nAre there crop predators? " + cropPredator+
-                "\nAre there animal predators? " + animalPredator);
+        System.out.println("This is a Hybrid Barn, it has crops and animals"
+                + "\nHorse:" + horse + " cow:" + cow + " pig:" + pig + " chicken:" + chicken
+                + " dog:" + dog + "\nacres of corn:" + corn + " tobacco:" + tobacco + " potato:"
+                + potato + "\nAre there crop predators? " + cropPredator
+                + "\nAre there animal predators? " + animalPredator);
     }
 }

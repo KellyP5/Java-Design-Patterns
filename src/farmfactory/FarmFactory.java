@@ -1,4 +1,4 @@
-package FarmFactory;
+package farmfactory;
 
 import java.util.Random;
 

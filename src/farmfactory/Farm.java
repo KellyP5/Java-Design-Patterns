@@ -1,4 +1,4 @@
-package FarmFactory;
+package farmfactory;
 
 public interface Farm {
     final static int upgrade = 1200;

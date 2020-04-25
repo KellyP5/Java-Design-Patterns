@@ -1,9 +1,8 @@
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import BarnStrategy.*;
-import FarmFactory.*;
-import TickObserver.*;
+import barnstrategy.*;
+import farmfactory.*;
+import tickobserver.*;
 
 import java.io.File;
 import java.io.FileInputStream;

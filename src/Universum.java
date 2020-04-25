@@ -1,4 +1,4 @@
-import TickObserver.FarmData;
+import tickobserver.FarmData;
 
 import java.util.Scanner;
 

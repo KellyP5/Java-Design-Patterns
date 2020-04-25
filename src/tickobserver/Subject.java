@@ -1,6 +1,6 @@
-package TickObserver;
+package tickobserver;
 
-import FarmFactory.Farm;
+import farmfactory.Farm;
 
 public interface Subject {
     public void registerObserver(Farm f);
